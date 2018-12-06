@@ -7,12 +7,12 @@ import { Book } from '../models/book.model';
 
 @Injectable()
 export class BookService {
-  private endpoint = 'book';
+  private endpoint = 'books';
 
   constructor(private http: HttpClient) {}
 
   public getBook(bookId: string): Observable<Book> {
-    return this.http.get<Book[]>(`${Constants.APP_DB}/${this.endpoint}/${bookId}`).pipe(
+    return this.http.get<Book[]>(`${Constants.APP_URI}/${this.endpoint}/${bookId}`).pipe(
       map((response: any) => {
         return response;
       })
@@ -20,7 +20,7 @@ export class BookService {
   }
 
   public getAllBooks(): Observable<[Book]> {
-    return this.http.get(`${Constants.APP_DB}/${this.endpoint}`).pipe(
+    return this.http.get(`${Constants.APP_URI}/${this.endpoint}`).pipe(
       map((response: [Book]) => {
         return response;
       })
@@ -29,7 +29,7 @@ export class BookService {
 
   public newController(book: Book): Observable<Book> {
     return this.http
-      .post(`${Constants.APP_DB}/${this.endpoint}`, book)
+      .post(`${Constants.APP_URI}/${this.endpoint}`, book)
       .pipe(map((response: Book) => response));
   }
 
@@ -37,7 +37,7 @@ export class BookService {
     const headers = new HttpHeaders();
     headers.append('Content-type', 'application/json');
     return this.http
-      .put<Book>(`${Constants.APP_DB}/${this.endpoint}/${book.id}`, Book, {
+      .put<Book>(`${Constants.APP_URI}/${this.endpoint}/${book.id}`, Book, {
         headers: headers
       })
       .pipe(map((response: Book) => response));
@@ -45,7 +45,7 @@ export class BookService {
 
   public deleteController(book: Book): Observable<Book> {
     return this.http
-      .delete<Book>(`${Constants.APP_DB}/${this.endpoint}/${book.id}`)
+      .delete<Book>(`${Constants.APP_URI}/${this.endpoint}/${book.id}`)
       .pipe(map((response: any) => response));
   }
 }

@@ -1,3 +1,3 @@
-export const APP_URI = 'http://192.168.4.1';
+export const APP_URI = 'http://localhost:8080/books/ctw';
 
-export const APP_DB = 'http://localhost:3000';
+//export const APP_DB = 'http://localhost:3000';

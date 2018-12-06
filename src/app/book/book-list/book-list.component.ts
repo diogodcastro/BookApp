@@ -1,3 +1,5 @@
+import { BookService } from './../../shared/services/book.service';
+import { Book } from './../../shared/models/book.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  constructor() {}
+  books: Book[];
 
-  ngOnInit() {}
+  constructor(private bookService: BookService) {}
+
+  ngOnInit() {
+    this.getAllBooks();
+  }
+
+  public getAllBooks(): void {
+    this.bookService.getAllBooks().subscribe((data: [Book]) => {
+      this.books = data;
+    });
+  }
 }
